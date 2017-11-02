@@ -33,6 +33,7 @@ class User extends Authenticatable
         return $this->hasMany('App\UsersImages');
     }
     
+    
     public function defaultImage($user_id = null)
     {
         if($user_id != null)

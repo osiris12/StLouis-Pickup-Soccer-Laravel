@@ -16,113 +16,41 @@
         <link rel="stylesheet" type="text/css" href="slicker/slick/slick-theme.css"/>
 
         <!-- Styles -->
-        <link href="https://lit-temple-21110.herokuapp.com/css/app.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
         <style>
-            .thumbnail a > img, .thumbnail > img {
-                height: 400px;
-                width: 100%;
+            .radio-inline+.radio-inline{
+                margin-left: 0px;
             }
-
-            .carousel{ 
-                background: #2f4357;
-                margin-top: 20px;
+            table.account td{
+                float: left;
             }
-            .carousel .item{
-                min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
-            }
-            .carousel .item img{
-                margin: 0 auto; /* Align slide image horizontally center */
-                width: 100%;
-                height: 400px;
-            }
-            .bs-example{
-                margin: 20px;
-            }
+        </style> 
 
-            .card {
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                max-width: 300px;
-                margin: auto;
-                text-align: center; 
-            }
-
-            .title {
-                color: grey;
-                font-size: 18px;
-            }
-
-            button {
-                border: none;
-                outline: 0;
-                display: inline-block;
-                padding: 8px;
-                color: white;
-                background-color: #000;
-                text-align: center;
-                cursor: pointer;
-                width: 100%;
-                font-size: 18px;
-            }
-
-            a {
-                text-decoration: none;
-                font-size: 22px;
-                color: black;
-            }
-
-            button:hover, a:hover {
-                opacity: 0.7;
-            }
-
-
-
-
-            * {
-                box-sizing: border-box;
-            }
-
-            .slider {
-                width: 50%;
-                margin: 100px auto;
-            }
-
-            .slick-slide {
-                margin: 0px 20px;
-            }
-
-            .slick-slide img {
-                width: 100%;
-            }
-
-            .slick-prev:before,
-            .slick-next:before {
-                color: black;
-            }
-
-
-            .slick-slide {
-                transition: all ease-in-out .3s;
-                opacity: .2;
-            }
-
-            .slick-active {
-                opacity: .5;
-            }
-
-            .slick-current {
-                opacity: 1;
-            }
-
-        </style>
     </head>
     <body>
         <div id="app">
             <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
-                    @yield('test')
+                    <div class="navbar-header">
+
+                        <!-- Collapsed Hamburger -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <!-- Branding Image -->
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            {{ config('app.name') }}
+                        </a>
+                    </div>
                 </div>
             </nav>
+            @yield('image_upload')
         </div>
         <!-- Scripts -->
 

@@ -20,10 +20,6 @@ Route::post('/vote', 'FieldsController@vote');
 Route::get('/account', 'UserController@index')->name('my_account'); 
 Route::post('/home', 'UserController@store_image')->name('store_image');
 
-Route::get('/php', function(){
-    return phpinfo();
-});
 
-Route::get('/slider', function(){
-    return view('slider');
-});
+Route::post('/info', 'UserController@addUserInfo');
+

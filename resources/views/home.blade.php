@@ -11,41 +11,19 @@
     </p>
 </div>
 @endguest
-
-
+ 
 <div class="row" style='background: white;'>
 @foreach($fields as $field)
-
 @php $images_count = count($images[$field->name]); @endphp
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-            <div class="bs-example">
-                <div id="myCarousel" class="carousel slide" data-interval="3000" >
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                    @for ($i = 0; $i < $images_count; $i++)
-                        @if($i == 0)
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        @else
-                        <li data-target="#myCarousel" data-slide-to="{{$i}}"></li>
-                        @endif
-                    @endfor
-                    </ol>   
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-                    @foreach($images[$field->name] as $image)
-                    @if($loop->index == 0)
-                        <div class="item active">
-                            <img src="images/{{$field->name}}/{{$image->image_name}}" alt="0 Slide">
-                        </div>
-                    @else
-                        <div class="item">
-                            <img src="images/{{$field->name}}/{{$image->image_name}}" alt="{{$loop->index}} Slide">
-                        </div>
-                    @endif 
-                    @endforeach
-                    </div>
+            <!-- Wrapper for carousel items -->
+            <div class="carouselContainer">
+            @foreach($images[$field->name] as $image)
+                <div>
+                    <img src="images/{{$field->name}}/{{$image->image_name}}">
                 </div>
+            @endforeach
             </div>
             <div class="caption">
                 <h3>{{$field->name}}</h3>
@@ -76,27 +54,16 @@
 @endforeach  
     
 
-<div class="control-buttons">
-    <input type="button" class="btn btn-info start-slide" value="Start Image Carousel">
-    <input type="button" class="btn btn-info pause-slide" value="Pause Image Carousel">
-</div>
 
 
 <script type="text/javascript">
     $(document).ready(function () {
-        // Initializes the carousel
-        $(".start-slide").click(function () {
-            $("#myCarousel").carousel('cycle');
-            $("#myCarousel2").carousel('cycle');
-            $("#myCarousel3").carousel('cycle');
+        $(".carouselContainer").slick({ 
+            dots: true,
+            arrows: true,
+            lazyLoad: 'ondemand', // ondemand progressive anticipated
+            infinite: true
         });
-        // Stops the carousel
-        $(".pause-slide").click(function () {
-            $("#myCarousel").carousel('pause');
-            $("#myCarousel2").carousel('pause');
-            $("#myCarousel3").carousel('pause');
-        });
-        
         $.each($(".up_vote, .down_vote"), function(index, value){
             $(value).click(function () {
                 var field_id = $(this).attr("data-field");
@@ -124,11 +91,16 @@
                     error: function (data)
                     {
                         console.log(data);
+                        //TODO This warning should appear if a player has already voted for a game.
+                        //Find out how to return an error response so that this block of code
+                        //is executed.
 //                        alert('You already voted for this game');
                     }
                 });
             });
         });
+        
+        
     });
 </script>
 <script type="text/javascript">
