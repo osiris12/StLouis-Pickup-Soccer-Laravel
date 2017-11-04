@@ -46,6 +46,7 @@ class FieldsController extends Controller
                 $field->votes += $quantity;
                 $field->players = $players;
                 $field->save();
+                $field->status = 'remove';
                 return response()->json($field);
             }
             elseif(!in_array($user_id, $players) && $quantity > 0)
@@ -60,18 +61,27 @@ class FieldsController extends Controller
                 }
                 $field->votes += $quantity; 
                 $field->save();
+                $field->status = 'add';
                 return response()->json($field);
             }
             else
-            {
+            { 
                 if($quantity > 0)
                 {
                     return response()->json([
-                        'code' => 401,
-                        'error' => 'You already voted for this game']);
+                        'type' => 'upvote',
+                        'error' => 'You already voted for this game'
+                    ], 409);
+                }
+                else
+                {
+                    return response()->json([
+                        'type' => 'downvote',
+                        'error' => 'You have not voted for this game'
+                    ], 409);
                 }
             }
-        }
+        } 
         return response()->json(['response' => 'This was a get method']);
     }
 }

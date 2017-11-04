@@ -83,6 +83,8 @@
                     data: {quantity: quantity, user_id: user_id, field_id: field_id},
                     success: function (data)
                     {
+                        console.log(data.status);
+                        removePicture(1);
                         var new_val = current_val + parseInt(quantity);
                         $(span).text(new_val);
                         if(data.votes >= 8)
@@ -92,18 +94,33 @@
                     },
                     error: function (data)
                     {
-                        console.log(data);
-                        //TODO This warning should appear if a player has already voted for a game.
-                        //Find out how to return an error response so that this block of code
-                        //is executed.
-//                        alert('You already voted for this game');
-                    }
+                        if(data.responseJSON.type == 'upvote')
+                        {
+                            alert('You already voted for this game');
+                        }
+                        else
+                        {
+                            alert('You have not voted for this game');
+                        }
+                    } 
                 });
             });
-        });
+        });  
         
         
     });
+    
+    /*
+     * TODO: In the success block, use the data.status value to determine whether
+     * the picture of the user adding or removing his vote is dealt with
+     * accordingly. Target the correct table that the user is updating 
+     * his vote for.
+     */
+    function removePicture(user_id)
+    {
+        var table = $(".test-t");
+        console.log(table);
+    }
 </script>
 <script type="text/javascript">
     function createGame(url)
