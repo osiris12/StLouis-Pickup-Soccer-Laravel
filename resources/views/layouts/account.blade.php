@@ -10,13 +10,13 @@
 
         <title>{{ config('app.name', 'St. Louis Pickup Soccer') }}</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-        <link href="{{asset('css/custom.css')}}" rel='stylesheet' type='text/css'>
+        <link href="{{asset('css/custom.css')}}?v={{env('CSS_V')}}" rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" type="text/css" href="slicker/slick/slick.css"/> 
-        <link rel="stylesheet" type="text/css" href="slicker/slick/slick-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="{{env('URL')}}slicker/slick/slick.css?v={{env('CSS_V')}}"/> 
+        <link rel="stylesheet" type="text/css" href="{{env('URL')}}slicker/slick/slick-theme.css?v={{env('CSS_V')}}"/>
 
         <!-- Styles -->
-        <link href="css/app.css" rel="stylesheet">
+        <link href="{{env('URL')}}css/app.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <style>
@@ -51,11 +51,13 @@
                 </div>
             </nav>
             @yield('image_upload')
+            @yield('display_account')
+            
+            
+            
         </div>
         <!-- Scripts -->
-
-
         <script src="{{ asset('js/app.js') }}"></script>  
-        <script type="text/javascript" src="slicker/slick/slick.min.js"></script>
+        <script type="text/javascript" src="{{env('URL')}}slicker/slick/slick.min.js"></script>
     </body> 
 </html>

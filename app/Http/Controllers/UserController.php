@@ -19,15 +19,13 @@ class UserController extends Controller
         $images = empty($user->userImages) ? '' : $user->userImages;
         $default_image = $user->defaultImage() == '' ? $user->standardImage() : $user->defaultImage();
         $user_info = DB::table('user_info')->where('user_id', '=', $user->id)->first();
-        return view(
-                'user_account', 
+        return view('user_account', 
                 [
                     'user' => $user, 
                     'images' => $images, 
                     'default_image' => $default_image,
                     'user_info' => $user_info
-                ]
-            );
+                ]);
     }
     public function store_image(Request $request)
     {
@@ -103,5 +101,20 @@ class UserController extends Controller
         }
        
         return back()->with('message', 'Account info update!');
+    }
+    
+    public function displayUserPage($id)
+    {
+        $user = User::find($id);
+        $images = empty($user->userImages) ? '' : $user->userImages;
+        $default_image = $user->defaultImage($id) == '' ? $user->standardImage() : $user->defaultImage($id);
+        $user_info = $user->getUserInfo($user->id);
+        return view('display_account',
+                    [
+                        'user' => $user,
+                        'user_info' => $user_info,
+                        'images' => $images,
+                        'default_image' => $default_image
+                    ]);
     }
 }

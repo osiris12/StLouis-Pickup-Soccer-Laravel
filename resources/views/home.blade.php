@@ -29,14 +29,16 @@
                 <h3>{{$field->name}}</h3>
                 <p id="{{$field->id}}">Total Votes: <span>{{$field->votes}}</span></p>
                 <table class="table">Players:
-                    @php $count = count($field->player_images); @endphp
+                    @php $count = count($field->players->player_images); @endphp
                     <thead>
                     @for($i = 0; $i < $count; $i++)
                         @if($i % 4 == 0) 
                         <tr>
                         @endif
                             <td>
-                                <img src="user_images/{{$field->player_images[$i]->image_name}}" class="img-responsive" alt="Responsive image" width="75" height="75" style="border-radius: 85px">
+                                <a href="/account/{{$field->players->player_ids[$i]}}">
+                                <img src="user_images/{{$field->players->player_images[$i]->image_name}}" class="img-responsive" alt="Responsive image" width="75" height="75" style="border-radius: 85px">
+                                </a>
                             </td>
                         @if($i % 4 == 4)  
                         </tr>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -53,6 +54,12 @@ class User extends Authenticatable
     {
         $image = \App\UsersImages::where('image_name', '=', 'standard_image.png')->first();
         return $image;
+    }
+    
+    public function getUserInfo($user_id)
+    {
+        $user_info = DB::table('user_info')->where('user_id', '=', $user_id)->first();
+        return $user_info;
     }
 }
   

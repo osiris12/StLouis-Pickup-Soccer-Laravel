@@ -23,3 +23,4 @@ Route::post('/home', 'UserController@store_image')->name('store_image');
 
 Route::post('/info', 'UserController@addUserInfo');
 
+Route::get('/account/{id}', 'UserController@displayUserPage');
