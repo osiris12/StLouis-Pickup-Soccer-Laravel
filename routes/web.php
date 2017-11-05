@@ -19,8 +19,8 @@ Route::get('/vote', 'FieldsController@vote');
 Route::post('/vote', 'FieldsController@vote');
 Route::get('/account', 'UserController@index')->name('my_account'); 
 Route::post('/home', 'UserController@store_image')->name('store_image');
-
-
 Route::post('/info', 'UserController@addUserInfo');
-
 Route::get('/account/{id}', 'UserController@displayUserPage');
+Route::get('/testing', function(){
+    return view('testing');
+});
