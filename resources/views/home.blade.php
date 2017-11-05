@@ -29,15 +29,15 @@
                 <h3>{{$field->name}}</h3>
                 <p id="{{$field->id}}">Total Votes: <span>{{$field->votes}}</span></p>
                 <table class="table">Players:
-                    @php $count = count($field->players->player_images); @endphp
+                    @php $count = count($field->players_info->player_images); @endphp
                     <thead>
                     @for($i = 0; $i < $count; $i++)
                         @if($i % 4 == 0) 
                         <tr>
                         @endif
                             <td>
-                                <a href="/account/{{$field->players->player_ids[$i]}}">
-                                <img src="user_images/{{$field->players->player_images[$i]->image_name}}" class="img-responsive" alt="Responsive image" width="75" height="75" style="border-radius: 85px">
+                                <a data-user-image="{{$field->id}} - {{$field->players_info->player_ids[$i]}}" href="/account/{{$field->players_info->player_ids[$i]}}">
+                                <img src="user_images/{{$field->players_info->player_images[$i]->image_name}}" class="img-responsive" alt="Responsive image" width="75" height="75" style="border-radius: 85px">
                                 </a>
                             </td>
                         @if($i % 4 == 4)  
@@ -61,8 +61,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".carouselContainer").slick({ 
-            dots: true,
-            arrows: true,
             lazyLoad: 'ondemand', // ondemand progressive anticipated
             infinite: true
         });
@@ -73,6 +71,7 @@
                 var quantity = $(this).attr("data-quantity");
                 var span = $("#"+field_id).children("span");
                 var current_val = parseInt($(span).text());
+                var string = field_id + " - " + user_id;
                 
                 $.ajax({
                     type: 'POST',
@@ -84,12 +83,15 @@
                     success: function (data)
                     {
                         console.log(data.status);
-                        removePicture(1);
                         var new_val = current_val + parseInt(quantity);
                         $(span).text(new_val);
                         if(data.votes >= 8)
                         {
                             alert("Game on bitches!");
+                        }
+                        if(data.status == 'remove')
+                        {
+                            $("a[data-user-image='"+string+"']").empty();
                         }
                     },
                     error: function (data)
@@ -106,21 +108,8 @@
                 });
             });
         });  
-        
-        
     });
     
-    /*
-     * TODO: In the success block, use the data.status value to determine whether
-     * the picture of the user adding or removing his vote is dealt with
-     * accordingly. Target the correct table that the user is updating 
-     * his vote for.
-     */
-    function removePicture(user_id)
-    {
-        var table = $(".test-t");
-        console.log(table);
-    }
 </script>
 <script type="text/javascript">
     function createGame(url)

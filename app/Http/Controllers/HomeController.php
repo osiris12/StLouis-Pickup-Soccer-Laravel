@@ -23,16 +23,19 @@ class HomeController extends Controller
         $images = array();
         foreach($fields as $field)
         {
-            $user_ids = explode(',', $field->players);
-            $field->players = collect();
-            $field->players->player_images = collect();
-            $field->players->player_ids = collect();
-            foreach($user_ids as $user_id)
+            $field->players_info = collect();
+            $field->players_info->player_images = collect();
+            $field->players_info->player_ids = collect();
+            if($field->players != '')
             {
-                $user = User::find($user_id);
-                $default_image = $user->defaultImage($user_id);
-                $field->players->player_images->push($default_image);
-                $field->players->player_ids->push($user_id);
+                $user_ids = explode(',', $field->players);
+                foreach($user_ids as $user_id)
+                {
+                    $user = User::find($user_id);
+                    $default_image = $user->defaultImage($user_id);
+                    $field->players_info->player_images->push($default_image);
+                    $field->players_info->player_ids->push($user_id);
+                }
             }
             $images[$field->name] =  $field->images; 
         }
