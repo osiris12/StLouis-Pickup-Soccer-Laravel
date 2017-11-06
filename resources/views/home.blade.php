@@ -11,18 +11,17 @@
     </p>
 </div>
 @endguest
-
-<div class="row" style='background: white;'>
-    <button id="collapseGames" class="btn btn-success" onclick=""> Games</button>
+@php $now = _now(true); @endphp
+<div class="row home">
+    <h1 style="text-align: center; margin-bottom: 15px; margin-top: 15px">{{$now}}</h1>
+    <button id="collapseGames" class="btn btn-success" onclick=""> Game List</button>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     @foreach($fields as $field)
-    @php $images_count = count($images[$field->name]); @endphp
-   
         <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading-{{$field->id}}">
+            <div class="panel-heading bg-primary" role="tab" id="heading-{{$field->id}}">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$field->id}}" aria-expanded="true" aria-controls="collapse-{{$field->id}}" >
-                <h4 class="panel-title">
-                        {{$field->name}}
+                <h4 class="panel-title" style="color: white;">
+                    {{$field->name}}: <span style='float: right;'>Votes: {{$field->votes}}</span>
                 </h4>
                 </a>
             </div> 
@@ -32,6 +31,7 @@
                         <div class="thumbnail">
                             <!-- Wrapper for carousel items -->
                             <div class="carouselContainer">
+                                @php $images_count = count($images[$field->name]);  @endphp
                                 @foreach($images[$field->name] as $image)
                                 <div>
                                     <img src="images/{{$field->name}}/{{$image->image_name}}">
@@ -60,8 +60,8 @@
                                     </thead>
                                 </table>
                                 @if (Auth::user())
-                                <button class="btn btn-primary up_vote" data-user="{{Auth::user()->id}}" data-field="{{$field->id}}" data-quantity="1">Vote</button>
-                                <button class="btn btn-danger down_vote" data-user="{{Auth::user()->id}}" data-field="{{$field->id}}" data-quantity="-1" role="button">Remove Vote</button></p>
+                                <button class="btn btn-primary up_vote" data-user="{{Auth::user()->id}}" data-field="{{$field->id}}" data-quantity="1"><strong>I'm In!</strong></button>
+                                            <button class="btn btn-danger down_vote" data-user="{{Auth::user()->id}}" data-field="{{$field->id}}" data-quantity="-1" role="button"><strong>I'm Out!</strong></button></p>
                                 @endif
                             </div>
                         </div>
@@ -134,7 +134,6 @@
     {
         $("#collapseGames").click(function () {
             $.each($(".panel-collapse"), function (index, value) {
-                console.log(value);
                 $(value).removeClass("in");
             });
         });

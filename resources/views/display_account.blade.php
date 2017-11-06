@@ -4,8 +4,8 @@
 <!-- Add icon library -->          
 
 
-<div class="row">
-    <div class="card col-xs-6 account" id="card" >
+<div class="row home" style='margin-left: 0px; margin-right: 0px;'>
+    <div class="card account" id="card" >
         <img src="{{env('URL')}}user_images/{{$default_image->image_name}}" class="img-responsive" alt="Responsive image" style="width:100%">
         <h1>{{$user->name}}</h1>
         <table class='account'> 

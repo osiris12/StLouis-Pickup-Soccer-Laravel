@@ -8,7 +8,7 @@
 
 
 
-<div class="row">
+<div class="row home">
     
     @if(isset($message)) <!-- Fix this success message -->
         <h4>{{$message}}</h4>

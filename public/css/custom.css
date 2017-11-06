@@ -1,5 +1,6 @@
 #card{
     float: left;
+    
 }
 
 .swiper-container { 
@@ -13,7 +14,7 @@
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 300px;
+    width: 100%;
     margin: auto;
     text-align: center; 
 }
@@ -100,17 +101,30 @@ button:hover, a:hover {
     overflow:hidden;
 }
 .carouselContainer img {
-    height:400px;
+    height:230px;
 }
 
 .panel-title{
-    font-size: 22px;
+    font-size: px;
 }
 
 #collapseGames{
-    margin-bottom: 25px;
-    margin-top: -22px;
     font-weight: bold;
     font-size: 23px;
+    margin-bottom: 1px;
 }
 
+.row, .home{
+    background: white;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: -21px;
+}
+
+.panel-default>.panel-heading{
+    background-color: #5bc0de; 
+}
+
+.panel-group .panel+.panel{
+    margin-top: 0px;
+}

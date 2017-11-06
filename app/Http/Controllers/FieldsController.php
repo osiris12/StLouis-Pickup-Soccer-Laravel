@@ -45,6 +45,7 @@ class FieldsController extends Controller
                 $players = implode(',', $players);
                 $field->votes += $quantity;
                 $field->players = $players;
+                $field->updated_at = _now();
                 $field->save();
                 $field->status = 'remove';
                 return response()->json($field);
@@ -60,6 +61,7 @@ class FieldsController extends Controller
                     $field->players .= ','.$user_id;
                 }
                 $field->votes += $quantity; 
+                $field->updated_at = _now();
                 $field->save();
                 $field->status = 'add';
                 return response()->json($field);
