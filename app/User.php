@@ -45,8 +45,12 @@ class User extends Authenticatable
         {
            $user = Auth::user()->id;
         }
-        $image = \App\UsersImages::where('user_id', '=', $user)
+        $image = \App\UsersImages::where('user_id', '=', $user_id)
                 ->where('default_image', '=', 1)->first();
+        if(empty($image))
+        {
+            $image = $this->standardImage();
+        }
         return $image;
     }
     
