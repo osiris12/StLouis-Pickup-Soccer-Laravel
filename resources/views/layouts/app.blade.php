@@ -19,7 +19,7 @@
     </head>
     <body>
         <div id="app">
-            <nav class="navbar navbar-default navbar-static-top">
+            <nav class="navbar navbar-default navbar-static-top" >
                 <div class="container">
                     <div class="navbar-header" > 
                         <!-- Collapsed Hamburger -->
@@ -36,17 +36,14 @@
                     </div> 
 
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="nav navbar-nav">
-                            &nbsp;
-                        </ul> 
+                       
 
                         <!-- Right Side Of Navbar -->
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
                             @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <a href="{{ route('login') }}"><button class="btn btn-primary">Login</button></a>
+                            <a href="{{ route('register') }}"><button class="btn btn-success">Signup</button></a>
                             @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
