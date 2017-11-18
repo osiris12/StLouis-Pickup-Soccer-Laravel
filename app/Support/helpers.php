@@ -15,3 +15,8 @@ function _now($string_date = false)
 {
     return $string_date ? Carbon::now('America/Chicago')->toFormattedDateString() : Carbon::now('America/Chicago');
 }
+
+function _tomorrow()
+{
+    return Carbon::tomorrow('America/Chicago')->toFormattedDateString();  
+}
